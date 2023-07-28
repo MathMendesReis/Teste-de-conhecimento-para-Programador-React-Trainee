@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Container } from "./styles";
 import { formatDuration } from "../../helpers/formatDuraton";
+import { key } from "../../services/key";
+
+
 
 interface Track {
   id: number;
@@ -25,7 +28,7 @@ export function CardAlbuns() {
     setLoading(true);
     const config = {
       headers: {
-        Authorization: "arthur.matheus.prado@gmail.com",
+        Authorization: key,
       },
     };
     try {
@@ -33,6 +36,8 @@ export function CardAlbuns() {
       setAlbumsData(response.data.data); // Usamos response.data.data para obter o array de álbuns
     } catch (error) {
       console.error("Erro ao buscar os álbuns:", error);
+      setLoading(false);
+
     } finally {
       setLoading(false);
     }

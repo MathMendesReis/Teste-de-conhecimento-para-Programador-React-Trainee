@@ -2,6 +2,7 @@ import { Container } from "./styled"
 import logo from '../../assets/logo.png'
 import { CardAlbuns } from "../../components/cardAlbuns/inde"
 
+
 function Main() {
     return (
     <Container >
