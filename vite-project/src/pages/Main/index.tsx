@@ -1,16 +1,32 @@
 import { Container } from "./styled"
-import logo from '../../../public/vite.svg'
+import logo from '../../assets/logo.png'
+import { CardAlbuns } from "../../components/cardAlbuns/inde"
 
 function Main() {
     return (
-    <Container>
-     <header>
-      <img src={logo} alt="" />
-     </header>
-     <main></main>
-     <footer>
-      <span>visite meu <a href="https://matheusmendes.vercel.app/">portifolio</a></span>
-     </footer>
+    <Container >
+      <main>
+        <header>
+          <img src={logo} alt="" />
+          <span>Discografia</span>
+        </header>
+        <main>
+          <header>
+            <label htmlFor="">
+              <span>Digite uma palavra</span>
+              <div>
+                  <input type="text" />
+                  <button type="submit">Procurar</button>
+              </div>
+            </label>
+          </header>
+          {/* // */}
+          <main>
+          <CardAlbuns/>
+          </main>
+        {/* // */}
+        </main>
+      </main>
     </Container>
     )
 }
