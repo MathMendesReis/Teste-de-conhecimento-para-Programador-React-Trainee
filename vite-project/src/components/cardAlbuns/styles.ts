@@ -11,6 +11,10 @@ margin-top: 1rem;
   flex-direction: column;
   gap: 2rem;
   padding: 0 3rem;
+  height: 50vh;
+  @media (max-width:475px) {
+        padding: 0;
+      }
   header{
     >h1{
     }
@@ -18,22 +22,35 @@ margin-top: 1rem;
   >section{
     display: flex;
     justify-content: space-between;
+    height: 70%;
+    >table:last-child{
+      align-items: center;
+    }
     >table{
       width: 15rem;
-      min-height: 30rem;
+      height: 20rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      >tr{
+
+      tr{
       display: flex;
       justify-content: flex-start;
       gap: 2rem;
       }
-      >td{
+      td{
       display: flex;
       justify-content: space-around;
       }
     }
   }
 }
+
+.notFound{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 `;

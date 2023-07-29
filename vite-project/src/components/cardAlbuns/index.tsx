@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import api from "../../services/api";
 import { Container } from "./styles";
 import { formatDuration } from "../../helpers/formatDuraton";
 import { key } from "../../services/key";
-
-
-
-interface Track {
-  id: number;
-  number: number;
-  title: string;
-  duration: number;
-}
-
-interface Album {
-  id: number;
-  name: string;
-  year: number;
-  tracks: Track[];
-}
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+// @ts-ignore
+import { Album, Track, setAlbumsData, setLoading } from "../../slices/albunsSlice";
+import { Head } from "../head";
 
 export function CardAlbuns() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [albumsData, setAlbumsData] = useState<Album[]>([]);
 
+
+  const albumsData = useAppSelector((state) => state.albums.albumsData);
+  const loading = useAppSelector((state) => state.albums.loading);
+  const dispatch = useAppDispatch();
+
+  // @ts-ignore
   async function fetchAlbums() {
-    setLoading(true);
+    dispatch(setLoading(true));
     const config = {
       headers: {
         Authorization: key,
@@ -33,18 +25,18 @@ export function CardAlbuns() {
     };
     try {
       const response = await api.get("/album", config);
-      setAlbumsData(response.data.data); // Usamos response.data.data para obter o array de álbuns
+      dispatch(setAlbumsData(response));
     } catch (error) {
       console.error("Erro ao buscar os álbuns:", error);
-      setLoading(false);
+      dispatch(setLoading(false));
 
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   }
 
   useEffect(() => {
-    fetchAlbums();
+    // fetchAlbums();
   }, []);
 
   return (
@@ -52,13 +44,14 @@ export function CardAlbuns() {
       {loading ? (
         <div>Carregando...</div>
       ) : albumsData.length === 0 ? (
-        <div>Nenhum álbum encontrado.</div>
+        <div className="notFound"><span>Nenhum álbum encontrado.</span></div>
       ) : (
         <>
           {albumsData.map((album) => (
             <li key={album.id}>
               <header>
                 <h1>{album.name}</h1>
+                <Head title={album.name}/>
                 <p>Ano: {album.year}</p>
               </header>
               <section>
@@ -70,9 +63,9 @@ export function CardAlbuns() {
                     </tr>
                   </thead>
                   <tbody>
-                    {album.tracks.map((track) => (
+                    {album?.tracks?.map((track) => (
                       <tr key={track.id}>
-                        <td>{track.number}</td>
+                         <td>{track.number}</td>
                         <td>{track.title}</td>
                       </tr>
                     ))}
@@ -85,7 +78,7 @@ export function CardAlbuns() {
                     </tr>
                   </thead>
                   <tbody>
-                    {album.tracks.map((track) => (
+                    {album?.tracks?.map((track) => (
                       <tr key={track.id}>
                         <td>{formatDuration(track.duration)}</td>
                       </tr>

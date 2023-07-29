@@ -1,6 +1,7 @@
 import { Container } from "./styled"
 import logo from '../../assets/logo.png'
-import { CardAlbuns } from "../../components/cardAlbuns/inde"
+import { CardAlbuns } from "../../components/cardAlbuns"
+import { Form } from "./form"
 
 
 function Main() {
@@ -13,19 +14,11 @@ function Main() {
         </header>
         <main>
           <header>
-            <label htmlFor="">
-              <span>Digite uma palavra</span>
-              <div>
-                  <input type="text" />
-                  <button type="submit">Procurar</button>
-              </div>
-            </label>
+            <Form/>
           </header>
-          {/* // */}
           <main>
           <CardAlbuns/>
           </main>
-        {/* // */}
         </main>
       </main>
     </Container>
