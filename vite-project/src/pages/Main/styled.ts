@@ -14,21 +14,26 @@ width: 100%;
 height: 100vh;
 padding: 3% 10%;
 >main{
-  height: 80vh;
+  height: 75vh;
   width: 100%;
   display: flex;
   flex-direction: column;
 
   >header{
-    height: 8rem;
+    min-height: 8rem;
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: ${({theme})=> theme.colors.white};
+    @media (max-width:475px) {
+        flex-direction: column;
+        padding: 0;
+      }
     span{
       font-size: ${({theme})=> theme.fontSize["4xl"]};
       font-weight: 600;
+
     }
   }
   >main{
@@ -42,6 +47,7 @@ padding: 3% 10%;
         align-items: center;
         justify-content: space-between;
         gap:1rem;
+
         >span{
           width: 100%;
         }
@@ -49,10 +55,18 @@ padding: 3% 10%;
         display: flex;
         width: 100%;
         gap: 1rem;
+        @media (max-width:475px) {
+          flex-direction: column;
+        }
         >input{
           width: 80%;
           border-radius: 12px;
-          border:1px solid
+          border:1px solid;
+          padding: 1rem;
+          @media (max-width:475px) {
+          height: 3rem;
+          width: 100%;
+        }
         }
         >button{
           background-color:#007dc1;
